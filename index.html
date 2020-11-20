@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Random Meeting Generator">
+    <meta name="author" content="Paulo P.">
+   
+    <title>Random Meeting Generator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin">
+      <img class="mb-4" src="img/manager.png" alt="" width="128" height="128">
+      <p>Meeting Reminders for Melissa H.</p>
+
+
+      <h2 id="title"></h2>
+      <div style="margin:40px;"></div>
+      <textarea style="width:500px;height:300px;" id="meetings"></textarea>
+      <button class="btn btn-lg btn-primary btn-block" onclick="generate_meetings(20);return false;">Generate More</button>
+      <p class="mt-5 mb-3 text-muted">&copy; Random Meeting Generator 2020</p>
+    </form>
+  </body>
+  <script>
+var entity_list = ['project', 'campaign', 'business', 'media', 'brand', 'DR', 'performance', 'social', 'best practice', 'client', 'internal']; 
+var type_list = ['planning', 'strategy', 'status', 'audit', 'insights'];
+var occasion_list = ['brainstorm', 'meeting', 'catch-up', 'workstream', 'update', 'discussion', 'chat'];
+
+
+function generate_meetings(num) {
+  document.getElementById("meetings").value = "";
+  var suggestions =  "Suggested meetings are:\n";
+  for(var i = 0; i < num; i++) {
+      var entity = entity_list[randomIntFromInterval(0,entity_list.length-1)];
+      var typo = type_list[randomIntFromInterval(0,type_list.length-1)];
+      var occasion = occasion_list[randomIntFromInterval(0,occasion_list.length-1)];
+      suggestions += `- ${entity} ${typo} ${occasion}\n` ;
+  }
+  document.getElementById("meetings").value = suggestions;
+}
+
+
+function randomIntFromInterval(min,max)
+{
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
+
+generate_meetings(20);
+  </script>
+</html>
